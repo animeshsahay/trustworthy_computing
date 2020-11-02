@@ -1,6 +1,6 @@
 __author__ = 'jkordas'
 
-#defined actions send between client and server
+# defined actions send between client and server
 USERNAME_ACTION = "__username__"
 PASSWORD_ACTION = "__password__"
 NEW_PASSWORD_ACTION = "__new_password__"

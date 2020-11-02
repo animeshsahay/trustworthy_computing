@@ -1,5 +1,4 @@
-
-#run server with secure connection
+# run server with secure connection
 import socket
 from OpenSSL import SSL
 

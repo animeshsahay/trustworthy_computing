@@ -1,7 +1,7 @@
-__author__ = 'jkordas'
-
 import getpass
 import sys
+
+from past.builtins import raw_input
 
 import config
 import actions
@@ -25,8 +25,8 @@ class Client:
         """
         try:
             self.socket.send(message)
-        except:
-            print "Unexpected error:", sys.exc_info()[0]
+        except Exception:
+            print("Unexpected error:", sys.exc_info()[0])
 
     def receive(self):
         """
@@ -35,8 +35,8 @@ class Client:
         input_line = None
         try:
             input_line = self.socket.recv(config.BUFFER_SIZE)
-        except:
-            print "Unexpected error:", sys.exc_info()[0]
+        except Exception:
+            print("Unexpected error:", sys.exc_info()[0])
 
         return input_line
 
@@ -48,32 +48,32 @@ class Client:
         if action_name == actions.QUIT_ACTION or len(action_name) == 0:
             return
         elif action_name == actions.USERNAME_ACTION:
-            input_line = raw_input("Username: ")                    # get username
+            input_line = raw_input("Username: ")  # get username
         elif action_name == actions.PASSWORD_ACTION:
-            input_line = getpass.getpass("Password: ")              # get password (with no echo)
+            input_line = getpass.getpass("Password: ")  # get password (with no echo)
             if self.nonce_send:
-                hashed_password = passwords.hash_password(input_line, self.salt)[0]      # hash pass
-                input_line = passwords.hash_password(hashed_password, self.nonce)[0]     # add nonce and hash again
+                hashed_password = passwords.hash_password(input_line, self.salt)[0]  # hash pass
+                input_line = passwords.hash_password(hashed_password, self.nonce)[0]  # add nonce and hash again
                 self.nonce_send = False
         elif action_name == actions.OLD_PASSWORD_ACTION:
-            input_line = getpass.getpass("Old_password: ")          # get password (with no echo)
+            input_line = getpass.getpass("Old_password: ")  # get password (with no echo)
         elif action_name == actions.NEW_PASSWORD_ACTION:
-            input_line = getpass.getpass("New_password: ")          # get password (with no echo)
+            input_line = getpass.getpass("New_password: ")  # get password (with no echo)
         elif action_name == actions.TYPE_ACTION:
-            input_line = raw_input(">> ")                           # get action type
+            input_line = raw_input(">> ")  # get action type
         elif action_name.find(actions.NONCE_ACTION) != -1:
             action, salt_value, nonce_value = action_name.split(':')
             self.salt = salt_value
             self.nonce = nonce_value
             self.nonce_send = True
             return
-        else:                                                       # other communicate from server
-            print action_name                                       # show it
+        else:  # other communicate from server
+            print(action_name)  # show it
             return
 
         if len(input_line) == 0:
-                input_line = "__"
-        self.send(input_line)                                       # send answer to server if needed
+            input_line = "__"
+        self.send(input_line)  # send answer to server if needed
 
     def handle_connection(self):
         """
@@ -88,5 +88,5 @@ class Client:
 
             for action in actions_array:
                 self.take_action(action)
-        print "Connection closed"
-        self.socket.close()                                          # Close the socket when done
+        print("Connection closed")
+        self.socket.close()  # Close the socket when done
