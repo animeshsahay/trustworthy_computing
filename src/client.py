@@ -61,8 +61,8 @@ class Client:
             input_line = getpass.getpass("New_password: ")  # get password (with no echo)
         elif action_name == actions.TYPE_ACTION:
             input_line = raw_input(">> ")  # get action type
-        elif action_name.find(actions.NONCE_ACTION) != -1:
-            action, salt_value, nonce_value = action_name.split(':')
+        elif action_name.find(str.encode(actions.NONCE_ACTION)) != -1:
+            action, salt_value, nonce_value = action_name.decode().split(':')
             self.salt = salt_value
             self.nonce = nonce_value
             self.nonce_send = True
