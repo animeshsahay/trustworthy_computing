@@ -6,7 +6,7 @@ import sys
 sys.path.insert(0, '/mnt/d/Downloads/trustworthy_computing/src')
 import src.database as database
 import config
-from server import ClientHandler
+from server_update import ClientHandler
 
 context = SSL.Context(SSL.SSLv23_METHOD)
 context.use_privatekey_file('keys/key')
@@ -23,5 +23,4 @@ database.create_table()                                                 # create
 while True:
     client_socket, address = s.accept()                                 # Establish connection with client
     clientThread = ClientHandler(client_socket)                         # create a thread for each user
-    clientThread.start()                                                # run thread  
-    
+    clientThread.start()                                                # run thread

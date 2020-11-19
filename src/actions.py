@@ -1,5 +1,3 @@
-__author__ = 'jkordas'
-
 # defined actions send between client and server
 USERNAME_ACTION = "__username__"
 PASSWORD_ACTION = "__password__"
@@ -8,3 +6,6 @@ OLD_PASSWORD_ACTION = "__old_password__"
 TYPE_ACTION = "__type__"
 QUIT_ACTION = "__quit__"
 NONCE_ACTION = "__nonce__"
+MESSAGE_ACTION="__message__"
+RSA_ACTION="__rsa__"
+AES_ACTION="__aes__"

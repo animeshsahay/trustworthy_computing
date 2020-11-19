@@ -62,51 +62,17 @@ class Encryptor:
         for file_name in dirs:
             self.decrypt_file(file_name)
 
-key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02}j\xdf\xcb\xc4\x94\x9d(\x9e'
-enc = Encryptor(key)
-clear = lambda:os.system('clear')
+# key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02}j\xdf\xcb\xc4\x94\x9d(\x9e'
+# enc = Encryptor(key)
+# clear = lambda:os.system('clear')
 
-if os.path.isfile('data.txt.enc'):
-    while True:
-        password = str(getpass("Enter Password: "))
-        enc.decrypt_file("data.txt.enc")
-        p = ""
-        with open("data.txt") as f:
-            p = f.readlines()
-        if p[0] == password:
-            enc.encrypt_file("data.txt")
-            break
-
-    while True:
-        clear()
-        choice = int(input(
-            '''1. press '1' to encrypt file. \n2. press '2' to decrypt file. \n3. press '3' to encrypt all the file in the current directory.\n4. press  '4' to decrypt all the file in the current directory. \n5. press '5' to exit. '''
-            ))
-        clear()
-        if choice == 1:
-            enc.encrypt_file(str(input("Enter name of file to encrypt :  ")))
-        elif choice == 2:
-            enc.decrypt_file(str(input("Enter name of file to decrypt :  ")))
-        elif choice == 5:
-            exit()
-        else:
-            print("please select a valid option!")
-		
-else:
-    while True:
-        clear()
-        password = str(getpass("Setting up stuff. Enter a password for authentication: "))
-        repassword = str(getpass("confirm password: "))
-        if password == repassword:
-            f = open("data.txt", "w")
-            f.write(password)
-            f.close()
-            enc.encrypt_file("data.txt")
-            print("please restart the program to complete the setup")
-
-            break
-        else:
-            print("Passwords Mismatch")
-			
-		
-
+# if os.path.isfile('data.txt.enc'):
+#     while True:
+#         password = str(getpass("Enter Password: "))
+#         enc.decrypt_file("data.txt.enc")
+#         p = ""
+#         with open("data.txt") as f:
+#             p = f.readlines()
+#         if p[0] == password:
+#             enc.encrypt_file("data.txt")
+#             break

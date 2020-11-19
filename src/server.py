@@ -71,7 +71,7 @@ class ClientHandler(threading.Thread):
                 is_valid = True
             else:
                 self.send("Password is invalid (should have more than 7 characters,"  # pass invalid
-                          " at last one digit, one lowercase and one uppercase),"  # send validate pass rules
+                          " at least one digit, one lowercase and one uppercase),"  # send validate pass rules
                           " try something else.")
 
         # password is valid
@@ -104,7 +104,9 @@ class ClientHandler(threading.Thread):
             salt = passwords.get_salt()  # to not reveal if username exist or not
             # behave naturally with newly generated salt
         nonce = passwords.get_salt()
-        self.send(actions.NONCE_ACTION + ":" + salt + ":" + nonce)
+        pb=actions.NONCE_ACTION+":"+salt+":"+nonce
+        #self.send(actions.NONCE_ACTION + ":" + salt + ":" + nonce)
+        self.send(pb.encode())
         self.send(actions.PASSWORD_ACTION)
         password = self.receive()  # get password
 
@@ -137,7 +139,7 @@ class ClientHandler(threading.Thread):
                 is_valid = True
             else:
                 self.send("Password is invalid (should have more than 7 characters,"  # pass invalid
-                          " at last one digit, one lowercase and one uppercase),"  # send validate pass rules
+                          " at least one digit, one lowercase and one uppercase),"  # send validate pass rules
                           " try something else.")
 
         # password is valid
