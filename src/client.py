@@ -1,7 +1,8 @@
 import getpass
 import sys
-from KriptaRSA import KriptaRSA
+import time
 
+from KriptaRSA import KriptaRSA
 from past.builtins import raw_input
 
 import config
@@ -94,14 +95,18 @@ class Client:
                             '-----END RSA PRIVATE KEY-----')
             print("PublicKey : ", k.getPublicKey().decode("utf-8"))
             print("PrivateKey : ", k.getPrivateKey().decode("utf-8"))
+            print("Encrypting Message")
             input_line = k.encrypt(k.getPublicKey(), input_l.encode())
+            time.sleep(1)
             print("Sending encrypted message")
             
         elif action_name == actions.AES_ACTION:
             input_l = raw_input(">> ")
             key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02}j\xdf\xcb\xc4\x94\x9d(\x9e'
             enc_aes = Encryptor(key)
+            print("Encrypting Message")
             input_line=enc_aes.encrypt(input_l,key)
+            time.sleep(1)
             print("Sending encrypted message")
             
         elif action_name.find(actions.NONCE_ACTION.encode()) != -1:
